@@ -2,7 +2,7 @@
 
 A password-protected home-screen preview with 11 fictional patients. No database or paid Vercel Password Protection add-on is required. Ordinary Vercel hosting/function usage still applies.
 
-Search, filters, notifications, quick review, and presentation dialogs run locally in the browser. Other-screen navigation and saving changes show a preview message. Feedback is shared separately.
+The updated Current design uses compact patient rows, score bars, and a quick-review panel. Search, filters, notifications, and patient switching run locally in the browser. Other-screen navigation and saving changes show a preview message. Feedback is shared separately.
 
 ## Run locally
 
