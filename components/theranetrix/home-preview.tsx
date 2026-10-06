@@ -8,8 +8,9 @@ import {SidebarProvider, Sidebar, SidebarTrigger} from '@/components/ui/sidebar'
 import type {Workspace} from '@/lib/theranetrix';
 import {needsAction} from '@/lib/patient-overview';
 import {Navigation, type Context} from './app';
-import {DoctorFocus} from './doctor-focus';
+import {ClinicianOverview} from './clinician-overview';
 import {NeedsActionBell} from './needs-action';
+import {WorkspaceAdvisorDock} from './advisor-dock';
 import {GuideButton} from './guide-dialog';
 
 const previewMessage = () => toast.info('Home screen preview', {
@@ -80,8 +81,9 @@ export function HomePreview({data}: {data: Workspace}) {
             <a href="/settings?tab=access" className="top-avatar" aria-label="Account and access">TN</a>
           </div>
         </header>
-        <main className="main-content" id="main-content"><DoctorFocus ctx={ctx}/></main>
-        <footer className="workspace-footer" style={{justifyContent: 'flex-start', gap: 16, flexWrap: 'wrap'}}><span>Focus concept · Sample patients · Changes are not saved</span><form action="/__preview/logout" method="post"><button type="submit" className="text-link">Lock preview</button></form></footer>
+        <main className="main-content" id="main-content"><ClinicianOverview ctx={ctx}/></main>
+        <WorkspaceAdvisorDock ctx={ctx} page="overview"/>
+        <footer className="workspace-footer" style={{justifyContent: 'flex-start', gap: 16, flexWrap: 'wrap'}}><span>Design preview · Sample patients · Changes are not saved</span><form action="/__preview/logout" method="post"><button type="submit" className="text-link">Lock preview</button></form></footer>
       </div>
       <Toaster position="top-right" richColors closeButton/>
     </SidebarProvider>

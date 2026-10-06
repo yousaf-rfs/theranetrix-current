@@ -7,7 +7,7 @@ import { ReportChartPreview } from '@/components/theranetrix/report-score';
 import styles from '../../app/current-theme/home-preview.module.css';
 
 export const metadata: Metadata = {
-  title: 'TheraNetrix | Doctor Focus',
+  title: 'TheraNetrix | Current',
   robots: { index: false, follow: false },
 };
 
