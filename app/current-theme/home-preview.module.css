@@ -481,3 +481,76 @@
 /* Keep patient details on white in both colour variations. */
 
 /* Forest's study controls follow its softer workspace palette. */
+
+/* Shared patient interactions retain Current's sage and green palette, including portals. */
+:global(body):has(.preview) {
+  --brand-teal: #24634f; --brand-teal-hover: #1b513f; --brand-turquoise: #31745c;
+  --brand-blue: #4b7f9a; --brand-ink: #243931; --brand-muted: #617067;
+  --brand-paper: #f7f8f5; --brand-soft: #eaf1e3; --brand-line: #dfe5dd; --brand-track: #e3e8df;
+}
+.preview.preview :global(.triage-patient[data-patient-clickable=true]) { cursor: pointer; }
+.preview.preview :global(.patient-panel-trigger) { display: block; width: 100%; text-align: left; border-radius: 6px; cursor: pointer; }
+.preview.preview :global(.patient-panel-trigger:focus-visible) { outline: 3px solid var(--brand-turquoise); outline-offset: 5px; }
+.preview.preview :global(.triage-patient[data-patient-clickable=true]:hover) { box-shadow: 0 6px 12px #12517e0a, 0 16px 30px #12517e14; }
+
+/* Small, input-driven responses keep the clinical worklist calm and scannable. */
+.preview.preview :global(.redesign-shell .triage-patient[data-patient-clickable=true]),
+.preview.preview :global(.redesign-shell .triage-summary .triage-summary-card) {
+  transition: transform 200ms ease-out, box-shadow 200ms ease-out, background-color 160ms ease;
+}
+.preview.preview :global(.redesign-shell :is([data-slot=button], .nav-link, .forest-sidebar-notification, .overview-direct-action, .triage-expand, .recommendation-trigger)),
+.preview.preview :global(.advisor-dock-fab) {
+  transition: background-color 160ms ease, color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+.preview.preview :global(.redesign-shell :is(.overview-direct-action, .triage-row-actions [data-slot=button]) > .lucide-arrow-right) {
+  transition: transform 180ms ease-out;
+}
+.preview.preview :global(.redesign-shell :is([data-slot=input], [data-slot=select-trigger])) {
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+.preview.preview :global(.redesign-shell .triage-patient[data-patient-clickable=true]:focus-within) {
+  box-shadow: 0 0 0 2px var(--brand-turquoise), 0 4px 16px #24393112;
+}
+.preview.preview :global(.redesign-shell :is(button, a, [data-slot=select-trigger]):focus-visible) {
+  outline: 3px solid var(--brand-turquoise); outline-offset: 3px;
+}
+.preview.preview :global(.redesign-shell .triage-filters [data-slot=input]:focus-visible) {
+  border-color: var(--brand-turquoise); box-shadow: 0 0 0 3px #24a3af20; outline: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .preview.preview :global(.redesign-shell .triage-patient[data-patient-clickable=true]:hover) {
+    transform: translateY(-3px); box-shadow: 0 6px 14px #12517e0a, 0 18px 34px #12517e16;
+  }
+  .preview.preview :global(.redesign-shell .triage-summary .triage-summary-card:hover) { transform: translateY(-3px); }
+  .preview.preview :global(.redesign-shell :is(.page-actions, .triage-row-actions, .dashboard-view-controls) [data-slot=button]:not(:disabled):hover),
+  .preview.preview :global(.advisor-dock-fab:hover) { transform: translateY(-1px); box-shadow: 0 4px 10px #12517e18; }
+  .preview.preview :global(.redesign-shell :is(.overview-direct-action, .triage-row-actions [data-slot=button]):hover > .lucide-arrow-right) { transform: translateX(3px); }
+  .preview.preview :global(.redesign-shell :is(.overview-direct-action, .triage-expand, .recommendation-trigger):hover) {
+    color: var(--brand-teal-hover); text-decoration: underline; text-underline-offset: 4px;
+  }
+  .preview.preview :global(.redesign-shell .nav-link:not([data-active=true]):hover > svg) { color: var(--brand-teal); }
+  .preview.preview :global(.redesign-shell .triage-filters [data-slot=input]:hover),
+  .preview.preview :global(.redesign-shell [data-slot=select-trigger]:hover) { border-color: var(--brand-turquoise); background: #fff; }
+}
+.preview.preview :global(.redesign-shell :is(.triage-summary-card, [data-slot=button]):not(:disabled):active),
+.preview.preview :global(.advisor-dock-fab:active) { transform: translateY(1px); }
+@media (prefers-reduced-motion: reduce) {
+  .preview.preview :global(*), .preview.preview :global(*)::before, .preview.preview :global(*)::after {
+    animation: none !important; transition: none !important;
+  }
+  .preview.preview :global(.redesign-shell :is(.triage-patient, .triage-summary-card, [data-slot=button], .overview-direct-action > svg)),
+  .preview.preview :global(.advisor-dock-fab) { transform: none !important; }
+}
+
+
+.preview.preview :global(.preview-record-heading) { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:16px; color:var(--brand-muted); font-size:13px; }
+.preview.preview :global(.preview-record-heading > span) { font-weight:600; text-transform:uppercase; letter-spacing:.08em; }
+.preview.preview :global(.preview-record-heading > button) { min-height:40px; padding:8px 14px; background:#fff; border:1px solid var(--brand-line); border-radius:6px; color:var(--brand-teal); cursor:pointer; }
+.preview.preview :global(.preview-record-heading > button:hover) { background:var(--brand-soft); }
+.preview.preview :global(.patient-record-head h1:focus) { outline:none; }
+
+/* Keep the ten-part report scale consistent with the patient sidebar. */
+.preview.preview :global(.triage-outcomes .report-score-track) {
+  border-radius: 0; mask-image: repeating-linear-gradient(to right, #000 0, #000 calc(10% - 2px), transparent calc(10% - 2px), transparent 10%);
+}
+.preview.preview :global(.triage-outcomes .report-score-track > span) { border-radius: 0; }

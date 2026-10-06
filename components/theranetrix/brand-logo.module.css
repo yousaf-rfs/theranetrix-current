@@ -1,0 +1,12 @@
+.logo, .compact {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  flex-shrink: 0;
+}
+.compact { width: 150px; }
+/* The mobile navigation is a dark sheet; keep the supplied artwork on white. */
+@media (max-width: 767px) {
+  .logo { padding: 6px; border-radius: 6px; background: #fff; }
+}
