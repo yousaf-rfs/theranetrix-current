@@ -554,3 +554,16 @@
   border-radius: 0; mask-image: repeating-linear-gradient(to right, #000 0, #000 calc(10% - 2px), transparent calc(10% - 2px), transparent 10%);
 }
 .preview.preview :global(.triage-outcomes .report-score-track > span) { border-radius: 0; }
+
+/* Match form portals to the Current workspace, including mobile navigation. */
+:global(body):has(.preview) :global([data-slot=dialog-content]),
+:global(body):has(.preview) :global([data-slot=sheet-content]),
+:global(body):has(.preview) :global([data-slot=select-content]) {
+  --primary:#24634f; --primary-foreground:#fff; --border:#dfe5dd; --input:#dfe5dd; --ring:#31745c;
+  color:#243931; font-family:'Thera Plex',Arial,sans-serif;
+}
+:global(body):has(.preview) :global([data-slot=dialog-content]) { border:1px solid #dfe5dd; border-radius:10px; box-shadow:0 12px 40px #24393120; }
+:global(body):has(.preview) :global([data-slot=dialog-content] [data-slot=button][data-variant=default]) { background:#24634f; color:#fff; }
+:global(body):has(.preview) :global([data-mobile=true]) { background:#eef1eb; color:#243931; }
+:global(body):has(.preview) :global([data-mobile=true] .nav-link[data-active=true]) { background:#24634f!important; color:#fff!important; }
+:global(body):has(.preview) :global([data-mobile=true] .nav-link[data-active=true] > svg) { color:#fff!important; }

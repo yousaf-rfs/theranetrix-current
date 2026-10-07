@@ -19,10 +19,10 @@ export function FormSection({title,description,children}:{title:string;descripti
 // Adult date-of-birth bounds (18 to 120 years) for the add-patient form; the server checks the same range.
 const yearsAgo=(years:number,days=0)=>{const d=new Date();d.setUTCFullYear(d.getUTCFullYear()-years);d.setUTCDate(d.getUTCDate()+days);return d.toISOString().slice(0,10);};
 export function RequiredField(){return <span className="care-required" aria-hidden="true">*</span>;}
-export function EntryDialog({entry,close,ctx}:{entry:Entry|null;close:()=>void;ctx:Context}){
-  return entry?<ActiveEntryDialog key={entry.kind+':'+(entry.patient?.id??'')} entry={entry} close={close} ctx={ctx}/>:null;
+export function EntryDialog({entry,close,ctx,onCloseAutoFocus}:{entry:Entry|null;close:()=>void;ctx:Context;onCloseAutoFocus?:(event:Event)=>void}){
+  return entry?<ActiveEntryDialog key={entry.kind+':'+(entry.patient?.id??'')} entry={entry} close={close} ctx={ctx} onCloseAutoFocus={onCloseAutoFocus}/>:null;
 }
-function ActiveEntryDialog({entry,close,ctx}:{entry:Entry;close:()=>void;ctx:Context}){
+function ActiveEntryDialog({entry,close,ctx,onCloseAutoFocus}:{entry:Entry;close:()=>void;ctx:Context;onCloseAutoFocus?:(event:Event)=>void}){
   const dirty=useRef(false),saving=useRef(false);
   const [discardOpen,setDiscardOpen]=useState(false);
   const spanish=entry.kind==='goal'&&entry.patient?.preferredLanguage==='es';
@@ -32,14 +32,14 @@ function ActiveEntryDialog({entry,close,ctx}:{entry:Entry;close:()=>void;ctx:Con
   }
   return <>
     <Dialog open onOpenChange={open=>{if(!open)requestClose();}}>
-      <DialogContent className="entry-dialog care-entry-dialog" showCloseButton={false} lang={spanish?'es':undefined}>
+      <DialogContent className="entry-dialog care-entry-dialog" showCloseButton={false} lang={spanish?'es':undefined} onCloseAutoFocus={onCloseAutoFocus}>
         <button type="button" className="absolute right-4 top-4 rounded-sm p-1" aria-label={spanish?'Cerrar':'Close'} disabled={ctx.busy} onClick={requestClose}><X size={18}/></button>
         <DialogHeader><DialogTitle>{spanish?'Actualizar objetivo':titles[entry.kind]}</DialogTitle><DialogDescription>{entry.patient?entry.patient.name+' · '+entry.patient.id:'Use fictional information in this evaluation workspace.'}</DialogDescription></DialogHeader>
         <EntryForm entry={entry} close={close} cancel={requestClose} ctx={ctx} spanish={spanish} onDirty={()=>{dirty.current=true;}} onSaving={value=>{saving.current=value;}}/>
       </DialogContent>
     </Dialog>
     <AlertDialog open={discardOpen} onOpenChange={setDiscardOpen}>
-      <AlertDialogContent lang={spanish?'es':undefined}>
+      <AlertDialogContent lang={spanish?'es':undefined} onCloseAutoFocus={onCloseAutoFocus}>
         <AlertDialogHeader><AlertDialogTitle>{spanish?'¿Descartar los cambios sin guardar?':'Discard unsaved changes?'}</AlertDialogTitle><AlertDialogDescription>{spanish?'Tu texto sigue aquí. Puedes continuar editándolo o descartarlo.':'Your text is still here. You can keep editing or discard this unfinished entry.'}</AlertDialogDescription></AlertDialogHeader>
         <AlertDialogFooter><AlertDialogCancel>{spanish?'Seguir editando':'Keep editing'}</AlertDialogCancel><AlertDialogAction disabled={ctx.busy} onClick={()=>{if(ctx.busy||saving.current)return;dirty.current=false;close();}}>{spanish?'Descartar cambios':'Discard changes'}</AlertDialogAction></AlertDialogFooter>
       </AlertDialogContent>
